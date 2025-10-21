@@ -1,0 +1,2 @@
+class EncryptedPdfError(Exception):
+    pass

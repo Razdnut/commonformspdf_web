@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    environment:
+      - LIBVA_DRIVER_NAME=radeonsi
+      - DRI_DEVICE=/dev/dri/renderD128
+    # Map VA-API devices for AMD/iGPU (Linux hosts)
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:
+      - "video"
+    volumes:
+      - ./:/app
+      - ./data:/data
+    # Keep container running; exec in or override for CLI commands
+    command: ["sleep", "infinity"]
+
